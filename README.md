@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -64,3 +65,7 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+=======
+# NPD-HCMS
+ It is house construction management that will help engineers or construction campanies and homeowner to connect where Homeowner will post project and to be view by engineers and comapany then they also send bid where user will accept bid or not but if they accept bid they will get contact of engineer then start getting in touch.
+>>>>>>> 6a4bbf285869cecf18d13bb4a6fb07d48fb5428e
