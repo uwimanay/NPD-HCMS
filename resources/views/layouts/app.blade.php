@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,14 +12,17 @@
         body {
             background-color: #f8f9fa;
         }
+
         .card {
             transition: transform 0.2s ease-in-out;
         }
+
         .card:hover {
             transform: scale(1.05);
         }
     </style>
 </head>
+
 <body>
     <div id="app">
         @yield('content')
@@ -42,4 +46,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 </body>
+
 </html>
