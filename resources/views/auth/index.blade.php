@@ -2,88 +2,134 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auth Page</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        .form-container {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f8f9fa;
+        .fade-enter {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
         }
-        .form-box {
-            width: 45%;
-            padding: 30px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            background-color: #fff;
+
+        .fade-enter-active {
+            opacity: 1;
         }
-        .text-primary {
-            color: #007bff !important;
+
+        .fade-leave {
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .fade-leave-active {
+            opacity: 0;
         }
     </style>
 </head>
-<body>
-<div class="container">
-    <h2 class="text-center mt-5 text-primary">Welcome to the House Construction Management System</h2>
-    <div class="form-container">
-        <!-- Login Form -->
-        <div class="form-box">
-            <h3 class="text-center text-primary">Login</h3>
-            <form action="{{ url('/login') }}" method="POST">
-                @csrf
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" name="email" class="form-control" required>
+
+<body class="bg-gray-100">
+
+    <div class="container mx-auto px-4 py-16">
+        <h2 class="text-3xl font-bold text-center text-blue-600 mb-10">Welcome to the House Construction Management
+            System</h2>
+
+        <div class="w-full max-w-md mx-auto bg-white p-8 shadow-lg rounded-lg relative">
+            <!-- Form Container -->
+            <div id="form-container">
+                <!-- Login Form -->
+                <div id="login-form" class="fade-enter-active">
+                    <h3 class="text-xl font-semibold text-center text-blue-600 mb-6">Login</h3>
+                    <form action="{{ url('/login') }}" method="POST">
+                        @csrf
+                        <div class="mb-4">
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
+                            <input type="email" name="email"
+                                class="form-input mt-1 block w-full border border-gray-300 rounded-lg p-2" required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="password" class="block text-sm font-medium text-gray-700">Password:</label>
+                            <input type="password" name="password"
+                                class="form-input mt-1 block w-full border border-gray-300 rounded-lg p-2" required>
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-500 transition">Login</button>
+                    </form>
+                    <p class="text-sm text-center mt-4">Don't have an account? <a href="#"
+                            class="text-blue-500 hover:text-blue-700" id="show-signup">Sign up</a></p>
                 </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" name="password" class="form-control" required>
+
+                <!-- Sign Up Form (Initially Hidden) -->
+                <div id="signup-form" class="hidden fade-enter">
+                    <h3 class="text-xl font-semibold text-center text-blue-600 mb-6">Sign Up</h3>
+                    <form action="{{ url('/register') }}" method="POST">
+                        @csrf
+                        <div class="mb-4">
+                            <label for="name" class="block text-sm font-medium text-gray-700">Name:</label>
+                            <input type="text" name="name"
+                                class="form-input mt-1 block w-full border border-gray-300 rounded-lg p-2" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
+                            <input type="email" name="email"
+                                class="form-input mt-1 block w-full border border-gray-300 rounded-lg p-2" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="password" class="block text-sm font-medium text-gray-700">Password:</label>
+                            <input type="password" name="password"
+                                class="form-input mt-1 block w-full border border-gray-300 rounded-lg p-2" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm
+                                Password:</label>
+                            <input type="password" name="password_confirmation"
+                                class="form-input mt-1 block w-full border border-gray-300 rounded-lg p-2" required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="role" class="block text-sm font-medium text-gray-700">Role:</label>
+                            <select name="role"
+                                class="form-select mt-1 block w-full border border-gray-300 rounded-lg p-2" required>
+                                <option value="homeowner">Homeowner</option>
+                                <option value="engineer">Engineer</option>
+                                <option value="company">Company</option>
+                            </select>
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-500 transition">Sign
+                            Up</button>
+                    </form>
+                    <p class="text-sm text-center mt-4">Already have an account? <a href="#"
+                            class="text-blue-500 hover:text-blue-700" id="show-login">Login</a></p>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Login</button>
-            </form>
-        </div>
-        <!-- Sign Up Form -->
-        <div class="form-box">
-            <h3 class="text-center text-primary">Sign Up</h3>
-            <form action="{{ url('/register') }}" method="POST">
-                @csrf
-                <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" name="name" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" name="email" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" name="password" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="password_confirmation">Confirm Password:</label>
-                    <input type="password" name="password_confirmation" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="role">Role:</label>
-                    <select name="role" class="form-control" required>
-                        <option value="homeowner">Homeowner</option>
-                        <option value="engineer">Engineer</option>
-                        <option value="company">Company</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
-            </form>
+            </div>
         </div>
     </div>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        const loginForm = document.getElementById('login-form');
+    const signupForm = document.getElementById('signup-form');
+    const showSignupLink = document.getElementById('show-signup');
+    const showLoginLink = document.getElementById('show-login');
+
+    function toggleForms() {
+        loginForm.classList.toggle('hidden');
+        signupForm.classList.toggle('hidden');
+        loginForm.classList.add('fade-enter-active');
+        signupForm.classList.add('fade-enter-active');
+    }
+
+    showSignupLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleForms();
+    });
+
+    showLoginLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleForms();
+    });
+    </script>
+
 </body>
+
 </html>

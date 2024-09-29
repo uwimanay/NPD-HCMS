@@ -1,156 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>House Construction Management System</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://kit.fontawesome.com/a076d05399.css">
     <link rel="icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .jumbotron {
-            background-image: url('{{ asset('images/BackgroounHead.jpg') }}');
+            background-image: url('{{ asset(' images/BackgroounHead.jpg') }}');
             background-size: cover;
             background-position: center;
             color: white;
         }
-        .section-header {
-            color: #555;
-        }
-        .bg-clients {
-            background-color: #f8b195;
-        }
-        .bg-engineers {
-            background-color: #355c7d;
-            color: white;
-        }
-        .bg-admin {
-            background-color: #f67280;
-            color: white;
-        }
+
         .card {
-            border-radius: 10px;
             transition: transform 0.2s;
         }
+
         .card:hover {
             transform: translateY(-10px);
         }
-        .bg-how-it-works-1 {
-            background-color: #f8b195;
-        }
-        .bg-how-it-works-2 {
-            background-color: #355c7d;
-        }
-        .bg-how-it-works-3 {
-            background-color: #f67280;
-        }
-        .bg-how-it-works-4 {
-            background-color: #6c5b7b;
-        }
-        .bg-how-it-works-5 {
-            background-color: #99b898;
-        }
-        .card-body {
-            color: #fff;
-        }
     </style>
 </head>
-<body>
-    <!-- Success Message -->
+
+<body class="font-sans antialiased bg-gray-100">
+
     @if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <div class="bg-green-500 text-white px-4 py-3 rounded relative" role="alert">
         {{ session('success') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+        <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+            <svg class="fill-current h-6 w-6 text-white" role="button" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20">
+                <path
+                    d="M14.348 14.849a1 1 0 0 1-1.415 0L10 11.414l-2.933 3.435a1 1 0 1 1-1.415-1.415l3.435-2.933L5.207 7.086a1 1 0 1 1 1.415-1.415l3.435 2.933L14.348 5.67a1 1 0 0 1 1.415 1.415L11.414 10l3.435 2.933a1 1 0 0 1 0 1.416z" />
+            </svg>
+        </span>
     </div>
     @endif
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">HCMS</a>
-        <a class="navbar-brand" href="{{ url('/') }}">
-            <img src="{{ asset('images/mylogo.png') }}" alt="Logo" style="width: 80px;"> <!-- Adjust the width as needed -->
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('landing') }}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('about-us') }}">About Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('services-page') }}">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-primary text-white" href="{{ route('auth') }}">Sign Up</a>
-                </li>
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="{{ url('/') }}" class="text-lg font-bold">HCMS</a>
+            <img src="{{ asset('images/mylogo.png') }}" alt="Logo" class="w-20"> <!-- Adjust the width as needed -->
+            <ul class="flex space-x-4">
+                <li><a href="{{ route('landing') }}" class="text-gray-600 hover:text-gray-900">Home</a></li>
+                <li><a href="{{ route('about-us') }}" class="text-gray-600 hover:text-gray-900">About Us</a></li>
+                <li><a href="{{ route('services-page') }}" class="text-gray-600 hover:text-gray-900">Services</a></li>
+                <li><a href="{{ route('auth') }}"
+                        class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Sign Up</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="jumbotron text-center">
-        <h1 class="display-4 fw-bold"> NPD Ltd House Construction Management System</h1>
-        <p class="lead fw-bold">Connecting homeowners with professional engineers and construction companies.</p>
-        
-        <a class="btn btn-primary btn-lg" href="{{ route('auth') }}" role="button">Get Started</a>
+    <div class="jumbotron text-center py-20">
+        <h1 class="text-4xl font-extrabold mb-4">NPD Ltd House Construction Management System</h1>
+        <p class="text-xl font-semibold mb-6">Connecting homeowners with professional engineers and construction
+            companies.</p>
+        <a href="{{ route('auth') }}" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600">Get
+            Started</a>
     </div>
 
-    <section id="features" class="container my-5">
-        <h1 class="text-center mb-4 section-header">Services</h1>
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="card bg-clients border-0 h-100">
-                    <div class="card-body">
-                        <h3 class="card-title">Clients (Homeowners)</h3>
-                        <ol class="list-group list-group-numbered">
-                            <li class="py-1">Connect and Search with Engineers</li>
-                            <li class="py-1">Appointment scheduling construction engineers</li>
-                            <li class="py-1">Feedback and Review</li>
-                        </ol>
-                    </div>
-                </div>
+    <section id="features" class="container mx-auto my-12">
+        <h1 class="text-center text-3xl font-bold mb-8">Services</h1>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="card bg-pink-200 rounded-lg p-6">
+                <h3 class="text-xl font-semibold mb-4">Clients (Homeowners)</h3>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                    <li>Connect and Search with Engineers</li>
+                    <li>Appointment scheduling with engineers</li>
+                    <li>Feedback and Review</li>
+                </ol>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="card bg-engineers border-0 h-100">
-                    <div class="card-body">
-                        <h3 class="card-title">Construction Engineers</h3>
-                        <ol class="list-group list-group-numbered">
-                            <li class="py-1">Create and maintain their own profiles</li>
-                            <li class="py-1">Showcase their qualifications and experience</li>
-                            <li class="py-1">Reputation Management via feedback and review</li>
-                        </ol>
-                    </div>
-                </div>
+            <div class="card bg-blue-700 text-white rounded-lg p-6">
+                <h3 class="text-xl font-semibold mb-4">Construction Engineers</h3>
+                <ol class="list-decimal list-inside space-y-2">
+                    <li>Create and maintain their own profiles</li>
+                    <li>Showcase qualifications and experience</li>
+                    <li>Reputation management via feedback and reviews</li>
+                </ol>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="card bg-admin border-0 h-100">
-                    <div class="card-body">
-                        <h3 class="card-title">Companies</h3>
-                        <ol class="list-group list-group-numbered">
-                            <li class="py-1">Reach a wider audience of potential clients</li>
-                            <li class="py-1">Centralized platform for connecting with clients</li>
-                            <li class="py-1">Reputation Management via feedback and review</li>
-                        </ol>
-                    </div>
-                </div>
+            <div class="card bg-red-500 text-white rounded-lg p-6">
+                <h3 class="text-xl font-semibold mb-4">Companies</h3>
+                <ol class="list-decimal list-inside space-y-2">
+                    <li>Reach a wider audience of potential clients</li>
+                    <li>Centralized platform for connecting with clients</li>
+                    <li>Reputation management via feedback and reviews</li>
+                </ol>
             </div>
         </div>
     </section>
 
-    <!-- Rest of your content remains unchanged -->
-
-    <footer class="bg-dark text-white pt-5 pb-4">
-        <!-- Footer content here -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto text-center">
+            &copy; 2024 House Construction Management System
+        </div>
     </footer>
 
-    <!-- Include jQuery and Bootstrap JS for the alert to work -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.8.1/dist/cdn.min.js"></script>
 </body>
+
 </html>
